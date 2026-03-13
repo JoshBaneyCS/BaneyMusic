@@ -3,6 +3,8 @@ import { Card } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { SelectLanguage } from './SelectLanguage'
 import { SelectTheme } from './SelectTheme'
+import { AccentColorPicker } from './AccentColorPicker'
+import { SelectUIDensity } from './SelectUIDensity'
 import { SelectDefaultView } from './SelectDefaultView'
 import { NotificationsToggle } from './NotificationsToggle'
 import { LastfmScrobbleToggle } from './LastfmScrobbleToggle'
@@ -23,6 +25,8 @@ const Personal = () => {
       <Title title={'BaneyMusic - ' + translate('menu.personal.name')} />
       <SimpleForm toolbar={null} variant={'outlined'}>
         <SelectTheme />
+        <AccentColorPicker />
+        <SelectUIDensity />
         <SelectLanguage />
         <SelectDefaultView />
         {config.enableReplayGain && <ReplayGainToggle />}
