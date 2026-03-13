@@ -38,8 +38,8 @@ func init() {
 var svcCmd = &cobra.Command{
 	Use:     "service",
 	Aliases: []string{"svc"},
-	Short:   "Manage Navidrome as a service",
-	Long:    fmt.Sprintf("Manage Navidrome as a service, using the OS service manager (%s)", service.Platform()),
+	Short:   "Manage BaneyMusic as a service",
+	Long:    fmt.Sprintf("Manage BaneyMusic as a service, using the OS service manager (%s)", service.Platform()),
 	Run:     runServiceCmd,
 }
 
@@ -86,8 +86,8 @@ var svcInstance = sync.OnceValue(func() service.Service {
 	}
 	svcConfig := &service.Config{
 		UserName:    installUser,
-		Name:        "navidrome",
-		DisplayName: "Navidrome",
+		Name:        "baneymusic",
+		DisplayName: "BaneyMusic",
 		Description: "Your Personal Streaming Service",
 		Dependencies: []string{
 			"After=remote-fs.target network.target",
@@ -148,12 +148,12 @@ func buildInstallCmd() *cobra.Command {
 		if err != nil {
 			log.Fatal(err)
 		}
-		println("Service installed. Use 'navidrome svc start' to start it.")
+		println("Service installed. Use 'baneymusic svc start' to start it.")
 	}
 
 	cmd := &cobra.Command{
 		Use:   "install",
-		Short: "Install Navidrome service.",
+		Short: "Install BaneyMusic service.",
 		Run:   runInstallCmd,
 	}
 	cmd.Flags().StringVarP(&installUser, "user", "u", "", "user to run service")
@@ -165,7 +165,7 @@ func buildInstallCmd() *cobra.Command {
 func buildUninstallCmd() *cobra.Command {
 	return &cobra.Command{
 		Use:   "uninstall",
-		Short: "Uninstall Navidrome service. Does not delete the music or data folders",
+		Short: "Uninstall BaneyMusic service. Does not delete the music or data folders",
 		Run: func(cmd *cobra.Command, args []string) {
 			err := svcInstance().Uninstall()
 			if err != nil {
@@ -179,13 +179,13 @@ func buildUninstallCmd() *cobra.Command {
 func buildStartCmd() *cobra.Command {
 	return &cobra.Command{
 		Use:   "start",
-		Short: "Start Navidrome service",
+		Short: "Start BaneyMusic service",
 		Run: func(cmd *cobra.Command, args []string) {
 			err := svcInstance().Start()
 			if err != nil {
 				log.Fatal(err)
 			}
-			println("Service started. Use 'navidrome svc status' to check its status.")
+			println("Service started. Use 'baneymusic svc status' to check its status.")
 		},
 	}
 }
@@ -193,13 +193,13 @@ func buildStartCmd() *cobra.Command {
 func buildStopCmd() *cobra.Command {
 	return &cobra.Command{
 		Use:   "stop",
-		Short: "Stop Navidrome service",
+		Short: "Stop BaneyMusic service",
 		Run: func(cmd *cobra.Command, args []string) {
 			err := svcInstance().Stop()
 			if err != nil {
 				log.Fatal(err)
 			}
-			println("Service stopped. Use 'navidrome svc status' to check its status.")
+			println("Service stopped. Use 'baneymusic svc status' to check its status.")
 		},
 	}
 }
@@ -207,13 +207,13 @@ func buildStopCmd() *cobra.Command {
 func buildStatusCmd() *cobra.Command {
 	return &cobra.Command{
 		Use:   "status",
-		Short: "Show Navidrome service status",
+		Short: "Show BaneyMusic service status",
 		Run: func(cmd *cobra.Command, args []string) {
 			status, err := svcInstance().Status()
 			if err != nil {
 				log.Fatal(err)
 			}
-			fmt.Printf("Navidrome is %s.\n", svcStatusLabels[status])
+			fmt.Printf("BaneyMusic is %s.\n", svcStatusLabels[status])
 		},
 	}
 }
@@ -221,7 +221,7 @@ func buildStatusCmd() *cobra.Command {
 func buildExecuteCmd() *cobra.Command {
 	return &cobra.Command{
 		Use:   "execute",
-		Short: "Run navidrome as a service in the foreground (it is very unlikely you want to run this, you are better off running just navidrome)",
+		Short: "Run BaneyMusic as a service in the foreground (it is very unlikely you want to run this, you are better off running just baneymusic)",
 		Run: func(cmd *cobra.Command, args []string) {
 			err := svcInstance().Run()
 			if err != nil {

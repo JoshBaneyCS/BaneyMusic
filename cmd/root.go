@@ -36,10 +36,10 @@ var (
 	noBanner bool
 
 	rootCmd = &cobra.Command{
-		Use:   "navidrome",
-		Short: "Navidrome is a self-hosted music server and streamer",
-		Long: `Navidrome is a self-hosted music server and streamer.
-Complete documentation is available at https://www.navidrome.org/docs`,
+		Use:   "baneymusic",
+		Short: "BaneyMusic is a self-hosted music server and streamer",
+		Long: `BaneyMusic is a self-hosted music server and streamer.
+Visit https://baneymusic.com for more information.`,
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
 			preRun()
 		},
@@ -53,7 +53,7 @@ Complete documentation is available at https://www.navidrome.org/docs`,
 	}
 )
 
-// Execute runs the root cobra command, which will start the Navidrome server by calling the runNavidrome function.
+// Execute runs the root cobra command, which will start the BaneyMusic server.
 func Execute() {
 	ctx, cancel := mainContext(context.Background())
 	defer cancel()
@@ -72,12 +72,10 @@ func preRun() {
 }
 
 func postRun() {
-	log.Info("Navidrome stopped, bye.")
+	log.Info("BaneyMusic stopped, bye.")
 }
 
-// runNavidrome is the main entry point for the Navidrome server. It starts all the services and blocks.
-// If any of the services returns an error, it will log it and exit. If the process receives a signal to exit,
-// it will cancel the context and exit gracefully.
+// runNavidrome is the main entry point for the BaneyMusic server. It starts all the services and blocks.
 func runNavidrome(ctx context.Context) {
 	defer db.Init(ctx)()
 
@@ -99,7 +97,7 @@ func runNavidrome(ctx context.Context) {
 	}
 
 	if err := g.Wait(); err != nil {
-		log.Error("Fatal error in Navidrome. Aborting", err)
+		log.Error("Fatal error in BaneyMusic. Aborting", err)
 	}
 }
 
@@ -369,13 +367,13 @@ func init() {
 	_ = viper.BindPFlag("logfile", rootCmd.PersistentFlags().Lookup("logfile"))
 
 	rootCmd.Flags().StringP("address", "a", viper.GetString("address"), "IP address to bind to")
-	rootCmd.Flags().IntP("port", "p", viper.GetInt("port"), "HTTP port Navidrome will listen to")
-	rootCmd.Flags().String("baseurl", viper.GetString("baseurl"), "base URL to configure Navidrome behind a proxy (ex: /music or http://my.server.com)")
+	rootCmd.Flags().IntP("port", "p", viper.GetInt("port"), "HTTP port BaneyMusic will listen to")
+	rootCmd.Flags().String("baseurl", viper.GetString("baseurl"), "base URL to configure BaneyMusic behind a proxy (ex: /music or http://my.server.com)")
 	rootCmd.Flags().String("tlscert", viper.GetString("tlscert"), "optional path to a TLS cert file (enables HTTPS listening)")
 	rootCmd.Flags().String("unixsocketperm", viper.GetString("unixsocketperm"), "optional file permission for the unix socket")
 	rootCmd.Flags().String("tlskey", viper.GetString("tlskey"), "optional path to a TLS key file (enables HTTPS listening)")
 
-	rootCmd.Flags().Duration("sessiontimeout", viper.GetDuration("sessiontimeout"), "how long Navidrome will wait before closing web ui idle sessions")
+	rootCmd.Flags().Duration("sessiontimeout", viper.GetDuration("sessiontimeout"), "how long BaneyMusic will wait before closing web ui idle sessions")
 	rootCmd.Flags().Duration("scaninterval", viper.GetDuration("scaninterval"), "how frequently to scan for changes in your music library")
 	rootCmd.Flags().String("uiloginbackgroundurl", viper.GetString("uiloginbackgroundurl"), "URL to a backaground image used in the Login page")
 	rootCmd.Flags().Bool("enabletranscodingconfig", viper.GetBool("enabletranscodingconfig"), "enables transcoding configuration in the UI")

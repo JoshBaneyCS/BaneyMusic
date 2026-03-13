@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	AppName = "navidrome"
+	AppName = "baneymusic"
 
 	DefaultDbPath                 = "navidrome.db?cache=shared&_busy_timeout=15000&_journal_mode=WAL&_foreign_keys=on&synchronous=normal"
 	InitialSetupFlagKey           = "InitialSetup"
@@ -42,8 +42,7 @@ const (
 	URLPathPublic       = "/share"
 	URLPathPublicImages = URLPathPublic + "/img"
 
-	// DefaultUILoginBackgroundURL uses Navidrome curated background images collection,
-	// available at https://unsplash.com/collections/20072696/navidrome
+	// DefaultUILoginBackgroundURL uses curated background images
 	DefaultUILoginBackgroundURL = "/backgrounds"
 
 	// DefaultUILoginBackgroundOffline Background image used in case external integrations are disabled
@@ -118,7 +117,7 @@ const (
 
 const (
 	InsightsIDKey          = "InsightsID"
-	InsightsEndpoint       = "https://insights.navidrome.org/collect"
+	InsightsEndpoint       = "" // Disabled for BaneyMusic
 	InsightsUpdateInterval = 24 * time.Hour
 	InsightsInitialDelay   = 30 * time.Minute
 )
@@ -164,7 +163,7 @@ var (
 	}
 )
 
-var HTTPUserAgent = "Navidrome" + "/" + Version
+var HTTPUserAgent = "BaneyMusic" + "/" + Version
 
 var (
 	VariousArtists = "Various Artists"

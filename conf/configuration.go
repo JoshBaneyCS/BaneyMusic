@@ -790,9 +790,9 @@ func InitConfig(cfgFile string, loadEnvVars bool) {
 		// Use config file from the flag.
 		viper.SetConfigFile(cfgFile)
 	} else {
-		// Search config in local directory with name "navidrome" (without extension).
+		// Search config in local directory with name "baneymusic" or "navidrome" (without extension).
 		viper.AddConfigPath(".")
-		viper.SetConfigName("navidrome")
+		viper.SetConfigName("baneymusic")
 	}
 
 	_ = viper.BindEnv("port")
