@@ -1,3 +1,5 @@
+import createBaneyDarkTheme from './baneyDark'
+import createBaneyLightTheme from './baneyLight'
 import LightTheme from './light'
 import DarkTheme from './dark'
 import ExtraDarkTheme from './extradark'
@@ -15,12 +17,23 @@ import AmusicTheme from './amusic'
 import SquiddiesGlassTheme from './SquiddiesGlass'
 import NautilineTheme from './nautiline'
 
+// BaneyMusic themes are created with the default accent color.
+// They are regenerated dynamically in useCurrentTheme when a custom accent is set.
+const BaneyDarkTheme = createBaneyDarkTheme()
+const BaneyLightTheme = createBaneyLightTheme()
+
+export { createBaneyDarkTheme, createBaneyLightTheme }
+
 export default {
-  // Classic default themes
+  // BaneyMusic default themes
+  BaneyDarkTheme,
+  BaneyLightTheme,
+
+  // Classic themes
   LightTheme,
   DarkTheme,
 
-  // New themes should be added here, in alphabetic order
+  // Community themes (alphabetic order)
   AmusicTheme,
   CatppuccinMacchiatoTheme,
   DraculaTheme,

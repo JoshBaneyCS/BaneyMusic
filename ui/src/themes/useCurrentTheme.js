@@ -1,24 +1,39 @@
 import { useSelector } from 'react-redux'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-import themes from './index'
+import themes, { createBaneyDarkTheme, createBaneyLightTheme } from './index'
 import { AUTO_THEME_ID } from '../consts'
 import config from '../config'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
+
+const isBaneyTheme = (name) =>
+  name === 'BaneyDarkTheme' || name === 'BaneyLightTheme'
 
 const useCurrentTheme = () => {
   const prefersLightMode = useMediaQuery('(prefers-color-scheme: light)')
-  const theme = useSelector((state) => {
+  const accentColor = useSelector((state) => state.settings?.accentColor)
+
+  const themeName = useSelector((state) => {
     if (state.theme === AUTO_THEME_ID) {
-      return prefersLightMode ? themes.LightTheme : themes.DarkTheme
+      return prefersLightMode ? 'BaneyLightTheme' : 'BaneyDarkTheme'
     }
-    const themeName =
+    return (
       Object.keys(themes).find((t) => t === state.theme) ||
       Object.keys(themes).find(
         (t) => themes[t].themeName === config.defaultTheme,
       ) ||
-      'DarkTheme'
-    return themes[themeName]
+      'BaneyDarkTheme'
+    )
   })
+
+  // Regenerate BaneyMusic themes with custom accent color if set
+  const theme = useMemo(() => {
+    if (isBaneyTheme(themeName) && accentColor) {
+      return themeName === 'BaneyLightTheme'
+        ? createBaneyLightTheme(accentColor)
+        : createBaneyDarkTheme(accentColor)
+    }
+    return themes[themeName] || themes.BaneyDarkTheme
+  }, [themeName, accentColor])
 
   useEffect(() => {
     const styles = document.getElementsByTagName('style')
