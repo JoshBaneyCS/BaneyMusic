@@ -4,6 +4,7 @@ import {
   SET_TOGGLEABLE_FIELDS,
   SET_ACCENT_COLOR,
   SET_UI_DENSITY,
+  SET_SHOW_DUPLICATES,
 } from '../actions'
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   omittedFields: {},
   accentColor: null, // null = use default BaneyMusic blue
   uiDensity: 'comfortable', // 'compact' | 'comfortable' | 'spacious'
+  showDuplicates: false, // false = hide duplicates by default
 }
 
 export const settingsReducer = (previousState = initialState, payload) => {
@@ -47,6 +49,11 @@ export const settingsReducer = (previousState = initialState, payload) => {
       return {
         ...previousState,
         uiDensity: data,
+      }
+    case SET_SHOW_DUPLICATES:
+      return {
+        ...previousState,
+        showDuplicates: data,
       }
     default:
       return previousState

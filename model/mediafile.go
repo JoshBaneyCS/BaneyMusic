@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"iter"
+	"math"
 	"mime"
 	"path/filepath"
 	"slices"
@@ -89,6 +90,8 @@ type MediaFile struct {
 
 	Tags         Tags         `structs:"tags" json:"tags,omitempty" hash:"ignore"`       // All imported tags from the original file
 	Participants Participants `structs:"participants" json:"participants" hash:"ignore"` // All artists that participated in this track
+
+	CanonicalKey string `structs:"canonical_key" json:"-" hash:"ignore"` // Dedup key: hash of normalized title+artist+duration
 
 	Missing   bool      `structs:"missing" json:"missing" hash:"ignore"`      // If the file is not found in the library's FS
 	BirthTime time.Time `structs:"birth_time" json:"birthTime" hash:"ignore"` // Time of file creation (ctime)
@@ -225,6 +228,20 @@ func (mf MediaFile) inferCodecFromSuffix() string {
 	default:
 		return ""
 	}
+}
+
+// ComputeCanonicalKey generates a dedup key from normalized title, artist, and duration.
+// Songs with the same canonical key are considered duplicates; the highest quality version wins.
+func ComputeCanonicalKey(title, artist string, duration float32) string {
+	t := strings.ToLower(strings.TrimSpace(title))
+	a := strings.ToLower(strings.TrimSpace(artist))
+	if t == "" {
+		return ""
+	}
+	// Round duration to nearest 5 seconds to tolerate slight encoding variations
+	d := int(math.Round(float64(duration)/5.0)) * 5
+	h := md5.Sum([]byte(fmt.Sprintf("%s|%s|%d", t, a, d)))
+	return fmt.Sprintf("%x", h)
 }
 
 type MediaFiles []MediaFile

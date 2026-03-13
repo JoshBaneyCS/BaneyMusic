@@ -106,6 +106,25 @@ func booleanFilter(field string, value any) Sqlizer {
 	return Eq{field: v == "true"}
 }
 
+// dedupFilter keeps only the highest-quality version per canonical_key.
+// Songs without a canonical key (empty) are always included.
+func dedupFilter(_ string, value any) Sqlizer {
+	v := strings.ToLower(value.(string))
+	if v != "true" {
+		return nil
+	}
+	return Expr(`(canonical_key = '' OR media_file.id IN (
+		SELECT id FROM (
+			SELECT id, ROW_NUMBER() OVER (
+				PARTITION BY canonical_key
+				ORDER BY bit_rate DESC, size DESC
+			) AS rn
+			FROM media_file
+			WHERE canonical_key != ''
+		) WHERE rn = 1
+	))`)
+}
+
 func fullTextFilter(tableName string, mbidFields ...string) func(string, any) Sqlizer {
 	return func(field string, value any) Sqlizer {
 		v := strings.ToLower(value.(string))

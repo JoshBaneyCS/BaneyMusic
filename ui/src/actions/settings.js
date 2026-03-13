@@ -3,6 +3,7 @@ export const SET_TOGGLEABLE_FIELDS = 'SET_TOGGLEABLE_FIELDS'
 export const SET_OMITTED_FIELDS = 'SET_OMITTED_FIELDS'
 export const SET_ACCENT_COLOR = 'SET_ACCENT_COLOR'
 export const SET_UI_DENSITY = 'SET_UI_DENSITY'
+export const SET_SHOW_DUPLICATES = 'SET_SHOW_DUPLICATES'
 
 export const setNotificationsState = (enabled) => ({
   type: SET_NOTIFICATIONS_STATE,
@@ -27,4 +28,9 @@ export const setAccentColor = (color) => ({
 export const setUIDensity = (density) => ({
   type: SET_UI_DENSITY,
   data: density,
+})
+
+export const setShowDuplicates = (show) => ({
+  type: SET_SHOW_DUPLICATES,
+  data: show,
 })

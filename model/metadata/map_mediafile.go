@@ -80,6 +80,9 @@ func (md Metadata) ToMediaFile(libID int, folderID string) model.MediaFile {
 	mf.PID = md.trackPID(mf)
 	mf.AlbumID = md.albumID(mf, conf.Server.PID.Album)
 
+	// Canonical key for duplicate detection
+	mf.CanonicalKey = model.ComputeCanonicalKey(mf.Title, mf.Artist, mf.Duration)
+
 	// BFR These IDs will go away once the UI handle multiple participants.
 	// BFR For Legacy Subsonic compatibility, we will set them in the API handlers
 	mf.ArtistID = mf.Participants.First(model.RoleArtist).ID

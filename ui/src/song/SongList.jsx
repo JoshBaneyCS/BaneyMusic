@@ -28,10 +28,10 @@ import {
   ArtistLinkField,
   PathField,
 } from '../common'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
-import { setTrack } from '../actions'
+import { setTrack, setShowDuplicates } from '../actions'
 import { SongListActions } from './SongListActions'
 import { AlbumLinkField } from './AlbumLinkField'
 import { SongBulkActions, QualityInfo, useSelectedFields } from '../common'
@@ -126,6 +126,13 @@ const SongFilter = (props) => {
         />
       )}
       {isAdmin && <NullableBooleanInput source="missing" />}
+      <QuickFilter
+        source="deduplicated"
+        label={translate('resources.song.fields.hideDuplicates', {
+          _: 'Hide Duplicates',
+        })}
+        defaultValue={true}
+      />
     </Filter>
   )
 }
@@ -135,6 +142,9 @@ const SongList = (props) => {
   const dispatch = useDispatch()
   const isXsmall = useMediaQuery((theme) => theme.breakpoints.down('xs'))
   const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('md'))
+  const showDuplicates = useSelector(
+    (state) => state.settings?.showDuplicates ?? false,
+  )
   useResourceRefresh('song')
 
   const handleRowClick = (id, basePath, record) => {
@@ -215,6 +225,7 @@ const SongList = (props) => {
         bulkActionButtons={<SongBulkActions />}
         actions={<SongListActions />}
         filters={<SongFilter />}
+        filter={showDuplicates ? {} : { deduplicated: true }}
         perPage={isXsmall ? 50 : 15}
       >
         {isXsmall ? (
