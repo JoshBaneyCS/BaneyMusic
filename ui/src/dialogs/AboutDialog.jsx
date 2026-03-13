@@ -85,10 +85,10 @@ const LinkToVersion = ({ version }) => {
   const commitID = parts[1].replace(/[()]/g, '')
   const isSnapshot = version.includes('SNAPSHOT')
   const url = isSnapshot
-    ? `https://github.com/navidrome/navidrome/compare/v${
+    ? `https://github.com/JoshBaneyCS/BaneyMusic/compare/v${
         parts[0].split('-')[0]
       }...${commitID}`
-    : `https://github.com/navidrome/navidrome/releases/tag/v${parts[0]}`
+    : `https://github.com/JoshBaneyCS/BaneyMusic/releases/tag/v${parts[0]}`
   return (
     <>
       <Link href={url} target="_blank" rel="noopener noreferrer">
@@ -192,23 +192,18 @@ const AboutTabContent = ({
         ) : null}
         <TableRow>
           <TableCell align="right" component="th" scope="row">
-            <Link
-              href={'https://github.com/sponsors/deluan'}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <IconButton size={'small'}>
-                <FavoriteBorderIcon fontSize={'small'} />
-              </IconButton>
-            </Link>
+            <IconButton size={'small'}>
+              <FavoriteBorderIcon fontSize={'small'} />
+            </IconButton>
           </TableCell>
           <TableCell align="left">
+            Built on{' '}
             <Link
-              href={'https://ko-fi.com/deluan'}
+              href={'https://github.com/navidrome/navidrome'}
               target="_blank"
               rel="noopener noreferrer"
             >
-              ko-fi.com/deluan
+              Navidrome
             </Link>
           </TableCell>
         </TableRow>
@@ -245,7 +240,7 @@ const ConfigTabContent = ({ configData }) => {
 
   const handleDownloadToml = () => {
     const tomlContent = configToToml(configData, translate)
-    const tomlFile = new File([tomlContent], 'navidrome.toml', {
+    const tomlFile = new File([tomlContent], 'baneymusic.toml', {
       type: 'text/plain',
     })
 

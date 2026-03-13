@@ -21,7 +21,7 @@ const exporter = (files) => {
     return { path }
   })
   jsonExport(filesToExport, { includeHeaders: false }, (err, csv) => {
-    downloadCSV(csv, 'navidrome_missing_files')
+    downloadCSV(csv, 'baneymusic_missing_files')
   })
 }
 
