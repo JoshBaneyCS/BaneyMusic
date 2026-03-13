@@ -70,13 +70,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const links = {
-  homepage: 'navidrome.org',
-  reddit: 'reddit.com/r/Navidrome',
-  twitter: 'twitter.com/navidrome',
-  discord: 'discord.gg/xh7j7yF',
-  source: 'github.com/navidrome/navidrome',
-  bugReports: 'github.com/navidrome/navidrome/issues/new/choose',
-  featureRequests: 'github.com/navidrome/navidrome/discussions/new',
+  homepage: 'baneymusic.com',
+  source: 'github.com/JoshBaneyCS/BaneyMusic',
+  bugReports: 'github.com/JoshBaneyCS/BaneyMusic/issues/new/choose',
+  featureRequests: 'github.com/JoshBaneyCS/BaneyMusic/discussions/new',
 }
 
 const LinkToVersion = ({ version }) => {
@@ -472,7 +469,7 @@ const AboutDialog = ({ open, onClose }) => {
       className={classes.expandableDialog}
     >
       <DialogTitle id="about-dialog-title" onClose={onClose}>
-        Navidrome Music Server
+        BaneyMusic
       </DialogTitle>
       <DialogContent dividers>
         <TabContent

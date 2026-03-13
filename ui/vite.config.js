@@ -56,10 +56,10 @@ export default defineConfig({
 // PWA manifest
 function manifest() {
   return {
-    name: 'Navidrome',
-    short_name: 'Navidrome',
+    name: 'BaneyMusic',
+    short_name: 'BaneyMusic',
     description:
-      'Navidrome, an open source web-based music collection server and streamer',
+      'BaneyMusic - Your personal music streaming platform',
     categories: ['music', 'entertainment'],
     display: 'standalone',
     start_url: './',
