@@ -52,6 +52,8 @@ func (m *dbMediaFile) PostScan() error {
 		}
 		m.Genre, m.Genres = m.MediaFile.Tags.ToGenres()
 	}
+	// Sanitize comment field at read time (preserves original in DB)
+	m.Comment = model.SanitizeComment(m.Comment)
 	return nil
 }
 
