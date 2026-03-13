@@ -21,6 +21,22 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     paddingBottom: (props) => (props.addPadding ? '80px' : '20px'),
+    '& .MuiListItemIcon-root': {
+      minWidth: 40,
+    },
+    '& a': {
+      borderRadius: 8,
+      marginLeft: 6,
+      marginRight: 6,
+      marginBottom: 2,
+      transition: 'background-color 0.15s ease, color 0.15s ease',
+      '&:hover': {
+        backgroundColor:
+          theme.palette.type === 'dark'
+            ? 'rgba(255,255,255,0.06)'
+            : 'rgba(0,0,0,0.04)',
+      },
+    },
   },
   open: {
     width: 240,
@@ -29,8 +45,15 @@ const useStyles = makeStyles((theme) => ({
     width: 55,
   },
   active: {
-    color: theme.palette.text.primary,
+    color: `${theme.palette.primary.main} !important`,
     fontWeight: 'bold',
+    backgroundColor:
+      theme.palette.type === 'dark'
+        ? 'rgba(66,170,255,0.12)'
+        : 'rgba(66,170,255,0.08)',
+    '& .MuiListItemIcon-root': {
+      color: theme.palette.primary.main,
+    },
   },
 }))
 

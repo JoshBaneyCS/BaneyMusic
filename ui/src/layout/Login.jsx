@@ -42,8 +42,11 @@ const useStyles = makeStyles(
     },
     card: {
       minWidth: 300,
+      maxWidth: 380,
       marginTop: '6em',
       overflow: 'visible',
+      borderRadius: 16,
+      boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
     },
     avatar: {
       margin: '1em',
@@ -55,12 +58,16 @@ const useStyles = makeStyles(
       backgroundColor: 'transparent',
       width: '6.3em',
       height: '6.3em',
+      borderRadius: 16,
     },
     systemName: {
-      marginTop: '1em',
+      marginTop: '0.5em',
       display: 'flex',
       justifyContent: 'center',
-      color: '#3f51b5', //theme.palette.grey[500]
+      fontSize: '1.4em',
+      fontWeight: 600,
+      letterSpacing: '0.02em',
+      color: theme.palette.primary?.main || '#42AAFF',
     },
     welcome: {
       marginTop: '1em',
@@ -68,7 +75,7 @@ const useStyles = makeStyles(
       display: 'flex',
       justifyContent: 'center',
       flexWrap: 'wrap',
-      color: '#3f51b5', //theme.palette.grey[500]
+      color: theme.palette.text?.secondary || '#666',
     },
     form: {
       padding: '0 1em 1em 1em',

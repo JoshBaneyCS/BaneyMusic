@@ -24,7 +24,7 @@ const useStyles = makeStyles(
       color: theme.palette.text.secondary,
     },
     active: {
-      color: theme.palette.text.primary,
+      color: theme.palette.primary.main,
     },
     icon: { minWidth: theme.spacing(5) },
   }),
