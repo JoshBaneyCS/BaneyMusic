@@ -1,4 +1,8 @@
-import { darken, lighten, alpha } from '@material-ui/core/styles/colorManipulator'
+import {
+  darken,
+  lighten,
+  alpha,
+} from '@material-ui/core/styles/colorManipulator'
 
 // Default BaneyMusic brand blue (from the logo)
 export const BANEY_BLUE = '#42AAFF'

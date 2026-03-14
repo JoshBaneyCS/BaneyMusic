@@ -124,8 +124,8 @@ COPY --from=build /out /
 ########################################################################################################################
 ### Build Final Image
 FROM public.ecr.aws/docker/library/alpine:3.20 AS final
-LABEL maintainer="deluan@navidrome.org"
-LABEL org.opencontainers.image.source="https://github.com/navidrome/navidrome"
+LABEL maintainer="me@joshbaney.com"
+LABEL org.opencontainers.image.source="https://github.com/JoshBaneyCS/BaneyMusic"
 
 # Install ffmpeg and mpv
 RUN apk add -U --no-cache ffmpeg mpv sqlite

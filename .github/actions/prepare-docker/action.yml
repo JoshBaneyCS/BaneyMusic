@@ -74,7 +74,7 @@ runs:
       uses: docker/metadata-action@v5
       with:
         labels: |
-          maintainer=deluan@navidrome.org
+          maintainer=me@joshbaney.com
         images: |
           name=${{env.DOCKER_HUB_REPO}},enable=${{env.DOCKER_HUB_ENABLED}}
           name=ghcr.io/${{ github.repository }}
